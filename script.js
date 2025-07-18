@@ -1,4 +1,8 @@
+
+
 const canvas = document.getElementById(`canvas`)
+
+
 const ctx = canvas.getContext(`2d`)
 
 const CentreX = canvas.width / 2
@@ -19,16 +23,56 @@ ctx.lineTo(CentreX, canvas.height)
 ctx.stroke()
 ctx.setLineDash([])
 
+
+
+
+// for angle of refraction
+
+
+
+
+
+
+
+const Btn = document.getElementById("Btn");
+
+Btn.addEventListener("click", function() {
+
+const incidentAngel = document.getElementById("incidentAngle");
+const Ref1 = document.getElementById("mu 1");
+const Ref2 = document.getElementById("mu 2");
+    
+    
+const MSinOfRefractedAngle = Ref1.value/Ref2.value * Math.sin(incidentAngel.value * (Math.PI / 180));
+
+console.log(MSinOfRefractedAngle);
+
+const ref = Math.asin(MSinOfRefractedAngle);
+
+
+console.log(ref);
+
+const slopeOfIncidence = Math.tan((incidentAngel + 90) * (Math.PI / 180))
+const slopeOfRefraction = Math.tan((ref + 90) * (Math.PI / 180))
+
+const x = 200
+
+const yi = slopeOfIncidence * x
+
+const yr = slopeOfRefraction * x
+
+
+
 ctx.strokeStyle = "cyan";
 ctx.lineWidth = 2;
 ctx.beginPath();
-ctx.moveTo(CentreX - 200, CentreY - 150);
+ctx.moveTo(CentreX - 200, CentreY - yi);
 ctx.lineTo(CentreX, CentreY);
 ctx.stroke();
 
 ctx.beginPath();
 ctx.moveTo(CentreX, CentreY);
-ctx.lineTo(CentreX + 150, CentreY + 200);
+ctx.lineTo(CentreX + 200, CentreY + yr);
 ctx.stroke();
 
 function drawArrowhead(x, y, angle) {
@@ -64,3 +108,11 @@ ctx.stroke();
 ctx.beginPath();
 ctx.arc(CentreX, CentreY, 30, 59999, Math.PI / 2, false); // angle r
 ctx.stroke();
+
+
+
+})
+
+
+
+
